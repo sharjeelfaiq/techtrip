@@ -20,29 +20,37 @@ const Cart = () => {
                     Your Cart Items
                 </h1>
                 <div className="flex flex-col gap-10 justify-center items-center">
-                    {totalItemsCount > 0 ? <>{PRODUCTS_DATA.map((product, index) => {
-                        if (cartItems[product.id] !== 0) {
-                            return (
-                                <CartItem
-                                    image={product.image}
-                                    name={product.name}
-                                    price={product.price}
-                                    id={product.id}
-                                    key={index}
-                                />
-                            );
-                        }
-                    })}
-                    <h1 className="text-3xl font-bold">
-                        Subtotal: Rs{totalAmount}
-                    </h1></>: <h1 className="text-2xl font-semibold text-center my-16">
-                    Your Cart Is Hungry...
-                </h1>}
+                    {totalItemsCount > 0 ? (
+                        <>
+                            {PRODUCTS_DATA.map((product, index) =>  {
+                                if (cartItems[product.id] !== 0) {
+                                    return (
+                                        <CartItem
+                                            image={product.image}
+                                            name={product.name}
+                                            price={product.price}
+                                            id={product.id}
+                                            key={index}
+                                        />
+                                    );
+                                } return null;
+                            })}
+                            <h1 className="text-3xl font-bold">
+                                Subtotal: Rs{totalAmount}
+                            </h1>
+                        </>
+                    ) : (
+                        <h1 className="text-2xl font-semibold text-center my-16">
+                            Your Cart Is Hungry...
+                        </h1>
+                    )}
                     <button
                         className="bg-black text-white transition duration-200 px-2 py-1 rounded-md border-[1px] border-solid border-black active:scale-95 font-medium"
                         onClick={() => navigate("/")}
                     >
-                        {totalItemsCount > 0 ? "Continue Shopping" : "Start Shopping"}
+                        {totalItemsCount > 0
+                            ? "Continue Shopping"
+                            : "Start Shopping"}
                     </button>
                 </div>
             </div>
